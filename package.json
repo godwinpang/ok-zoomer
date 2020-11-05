@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/godwinpang/ok-zoomer/issues"
   },
-  "homepage": "https://github.com/godwinpang/ok-zoomer#readme"
+  "homepage": "https://github.com/godwinpang/ok-zoomer#readme",
+  "dependencies": {
+    "dot-env": "0.0.1"
+  }
 }
