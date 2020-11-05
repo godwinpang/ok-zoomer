@@ -1,22 +1,17 @@
 {
-  "name": "ok-zoomer",
+  "name": "botkit-meetingbot",
   "version": "1.0.0",
   "description": "",
+  "main": "bot.js",
   "scripts": {
-    "start": "node index.js",
-    "pg:start": "docker rm --force postgres || true && docker run -t -d --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=password -e POSTGRES_USER=user postgres:12.3"
+    "start": "node bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/godwinpang/ok-zoomer.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/godwinpang/ok-zoomer/issues"
-  },
-  "homepage": "https://github.com/godwinpang/ok-zoomer#readme",
   "dependencies": {
-    "dot-env": "0.0.1"
+    "botbuilder-adapter-slack": "^1.0.13",
+    "botbuilder-storage-mongodb": "^0.9.5",
+    "botkit": "^4.10.0",
+    "botkit-plugin-cms": "^1.0.3",
+    "dotenv": "^7.0.0"
   }
 }
