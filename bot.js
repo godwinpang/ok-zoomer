@@ -123,7 +123,7 @@ const gcal = require('./gcalstuff').init(controller)
 async function runJob() {
     const users = await gcal._getAllUsers()
     for (user of users) {
-        console.log(users)
+        console.log(user)
     }
 }
 
