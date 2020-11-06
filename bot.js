@@ -128,6 +128,9 @@ async function runJob() {
         const {user_id, token} = user
         const events = await getEvents(user_id, token)
         for (eventObj of events) {
+            if (!eventObj.endTime) {
+                continue
+            }
             const end = new Date(eventObj.endTime)
             if (eventEnd > new Date(now + ((min_to_end - 1) * 60000)) && eventEnd > new Date(now + ((min_to_end + 1) * 60000))) {
                 send_msg("Your meeting is about to end - please wrap things up soon :)", user_id)
