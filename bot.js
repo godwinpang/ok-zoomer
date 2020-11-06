@@ -59,6 +59,10 @@ const controller = new Botkit({
     storage
 });
 
+controller.webserver.get('/auth/callback', function(req, res) {
+    res.send(`<p>Next, copy and paste this Authentication Code in Slack with the command /meeting-token ${req.query.code}`);
+  });
+
 if (process.env.CMS_URI) {
     controller.usePlugin(new BotkitCMSHelper({
         uri: process.env.CMS_URI,
