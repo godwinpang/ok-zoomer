@@ -26,6 +26,16 @@ module.exports = {
             await db.collection('users').insertOne(userObj)
         }
 
+        _getAllUsers = async function() {
+            const usersCursor = await db.collection('users').find()
+            const users = []
+            while(usersCursor.hasNext()) {
+                users.append(usersCursor.next())
+            }
+
+            return users;
+        }
+
         return {
             getAuthUrl,
             saveUser
