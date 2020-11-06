@@ -148,4 +148,5 @@ async function send_msg(text, user_id) {
 }
 
 // setInterval(()=>send_msg(controller, "life is great :)", "U01A61TQ5KL"), 1000)
+runJob()
 setInterval(runJob, 60000*5)
