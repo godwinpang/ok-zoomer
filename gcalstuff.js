@@ -47,14 +47,15 @@ module.exports = {
                 singleEvents: true,
                 orderBy: 'startTime',
                 timeZone: "utc",
-                timeMin: new Date(),
-                timeMax: addMinutes(new Date(), 1)
+                timeMin: subMinutes(new Date(), 10),
+                timeMax: addMinutes(new Date(), 10)
             }
 
             const result = await google.calendar('v3').events.list(args)
             const meetings = []
+            const now = new Date()
             for (meeting of result.data.items) {
-                if (!meeting.start.startTime) {
+                if (!meeting.start.startTime || meeting.start.startTime < now) {
                     continue
                 }
 
@@ -65,6 +66,8 @@ module.exports = {
                     attendees: meeting.attendees,
                 }
                 meetings.push(meetingObj)
+
+                break
             }
 
             return meetings
