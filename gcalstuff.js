@@ -27,11 +27,7 @@ module.exports = {
         }
 
         _getAllUsers = async function() {
-            const usersCursor = await db.collection('users').find()
-            const users = []
-            while(usersCursor.hasNext()) {
-                users.push(usersCursor.next())
-            }
+            const users= await db.collection('users').find().toArray()
 
             return users;
         }
