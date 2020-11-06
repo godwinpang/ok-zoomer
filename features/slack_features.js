@@ -49,13 +49,12 @@ module.exports = function(controller) {
 
     controller.on('slash_command', async(bot, message) => {
       console.log(message)
-      console.log(bot.replyAcknowledge)
-      bot.replyAcknowledge()
       switch (message.command) {
         case "/meeting-auth":
-          bot.reply(message, "gotcha!")
+          bot.replyPrivate(message, "gotcha!")
           break;
         default:
+          bot.replyAcknowledge(()=>{})
           return
       }
     });
