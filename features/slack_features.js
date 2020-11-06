@@ -57,10 +57,11 @@ module.exports = function(controller) {
           bot.replyPrivate(message, `Click on this link ${authURL}\nThen copy the token and reply with /meeting-token <token>`)
           break;
         case "/meeting-token":
-          const token = message.text
+          const code = message.text
           const user_id = message.user_id
           const user_name = message.user_name
           // do something with auth here :)
+          const token = await gcal.getToken(code)
           const user_object = {token, user_id, user_name}
           await gcal.saveUser(user_object)
           bot.replyPrivate(message, "Got your token")

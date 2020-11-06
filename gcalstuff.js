@@ -6,6 +6,8 @@ const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_REDIRECT_URL
 );
 
+const { subHours, addHours, addMinutes, subMinutes } = require('date-fns')
+
 module.exports = {
     init: function(controller) {
         const storage = controller.storage
@@ -32,10 +34,34 @@ module.exports = {
             return users;
         }
 
+        getEvents = async function(user_id, oauth_token) {
+            console.log(oauth_token)
+            oauth2Client.setCredentials({access_token: oauth_token})
+
+            const args = {
+                auth: oauth2Client,
+                calendarId: 'primary',
+                maxResults: 10,
+                singleEvents: true,
+                orderBy: 'startTime',
+                timeZone: "utc",
+                timeMin: subMinutes(new Date(), 10),
+                timeMax: addMinutes(new Date(), 10)
+            }
+
+            const result = await google.calendar('v3').events.list(args)
+            return result
+        }
+
+        getToken = async function(code) {
+            return await oauth2Client.getToken(code)
+        }
+
         return {
             getAuthUrl,
             saveUser,
-            _getAllUsers
+            _getAllUsers,
+            getEvents
         }
     }
 }

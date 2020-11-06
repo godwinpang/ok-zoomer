@@ -123,8 +123,16 @@ const gcal = require('./gcalstuff').init(controller)
 async function runJob() {
     const users = await gcal._getAllUsers()
     for (user of users) {
-        console.log(user)
+        const {user_id, token} = user
+        const events = await getEvents(user_id, token)
+        console.log(events)
     }
 }
 
-setInterval(runJob, 10000)
+async function send_msg(controller, text, user_id) {
+    const bot = await controller.spawn();
+    await bot.api.chat.postMessage({text, channel: user_id, token: process.env.BOT_TOKEN})
+}
+
+// setInterval(()=>send_msg(controller, "life is great :)", "U01A61TQ5KL"), 1000)
+setInterval(runJob, 1000)
