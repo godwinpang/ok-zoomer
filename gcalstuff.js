@@ -1,4 +1,5 @@
 const {google} = require('googleapis');
+const { MongoClient } = require('mongodb');
 const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
@@ -8,6 +9,11 @@ const oauth2Client = new google.auth.OAuth2(
 module.exports = {
     init: function(controller) {
         const storage = controller.storage
+        const client = new MongoClient(process.env.MONGO_URI)
+        var db = null
+        client.connect(function(err, client) {
+            db = client.db('ok-zoomer')
+        })
         getAuthUrl = function(){
             return oauth2Client.generateAuthUrl({
                 access_type: 'offline', // 'online' (default) or 'offline' (gets refresh_token),

@@ -18,19 +18,11 @@ const { MongoClient } = require('mongodb');
 // Load process.env values from .env file
 require('dotenv').config();
 
-var db = null;
-var client = null;
-
 let storage = null;
 if (process.env.MONGO_URI) {
     storage = mongoStorage = new MongoDbStorage({
         url : process.env.MONGO_URI,
     });
-
-    client = new MongoClient(process.env.MONGO_URI)
-    client.connect(function(err, client){
-        db = client.db('ok-zoomer')
-    })
 }
 
 const adapter = new SlackAdapter({
