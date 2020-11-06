@@ -28,8 +28,9 @@ if (process.env.MONGO_URI) {
     });
 
     client = new MongoClient(process.env.MONGO_URI)
-    await client.connect()
-    db = client.db('ok-zoomer')
+    client.connect(function(err, client){
+        db = client.db('ok-zoomer')
+    })
 }
 
 const adapter = new SlackAdapter({
