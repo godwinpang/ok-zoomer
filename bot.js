@@ -125,7 +125,8 @@ async function runJob() {
     const users = await gcal._getAllUsers()
     const now = new Date().getTime()
     for (user of users) {
-        const {user_id, token} = user
+        const {user_id, token, user_name} = user
+        console.log(`processing ${user_name}`)
         const events = await getEvents(user_id, token)
         for (eventObj of events) {
             if (!eventObj.endTime) {
@@ -133,6 +134,7 @@ async function runJob() {
             }
             const eventEnd = new Date(eventObj.endTime)
             if (eventEnd > new Date(now + ((min_to_end - 1) * 60000)) && eventEnd > new Date(now + ((min_to_end + 1) * 60000))) {
+                console.log(eventObj)
                 send_msg("Your meeting is about to end - please wrap things up soon :)", user_id)
             }
         }
