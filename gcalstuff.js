@@ -17,6 +17,7 @@ module.exports = {
         }
 
         saveUser = function(userObj){
+            console.log(storage)
             storage.users.save(userObj, function(err, data){
                 if (err) {
                     console.error(err)
