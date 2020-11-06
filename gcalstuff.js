@@ -38,7 +38,8 @@ module.exports = {
 
         return {
             getAuthUrl,
-            saveUser
+            saveUser,
+            _getAllUsers
         }
     }
 }
