@@ -50,7 +50,10 @@ module.exports = function(controller) {
     controller.on('slash_command', async(bot, message) => {
       switch (message.command) {
         case "/meeting-auth":
-          bot.replyPrivate(message, "gotcha!", replyCallback)
+          bot.replyPrivate(message, "Starting auth process...", replyCallback)
+          bot.sendWebhook({
+            text: "test send to webhook"
+          }, replyCallback)
           break;
         default:
           bot.replyAcknowledge(()=>{})
