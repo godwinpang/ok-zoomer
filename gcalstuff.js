@@ -17,8 +17,8 @@ module.exports = {
         }
 
         saveUser = function(userObj){
-            console.log(storage)
-            storage.users.save(userObj, function(err, data){
+            console.log(storage.getCollection('ok-zoomer', 'users'))
+            storage.getCollection('ok-zoomer', 'users').save(userObj, function(err, data){
                 if (err) {
                     console.error(err)
                 }
