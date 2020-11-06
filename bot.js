@@ -152,5 +152,5 @@ async function send_msg(text, user_id) {
     await bot.api.chat.postMessage({text, channel: user_id, token: process.env.BOT_TOKEN})
 }
 
-runJob()
-setInterval(runJob, 60000*5)
+setTimeout(runJob, 10000)
+setInterval(runJob, 60000*3)
