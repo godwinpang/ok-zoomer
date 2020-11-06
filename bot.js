@@ -118,7 +118,7 @@ async function getBotUserByTeam(teamId) {
 
 
 // HERE!!!!!!!!!!!!!!
-const gcal = require('../gcalstuff').init(controller)
+const gcal = require('./gcalstuff').init(controller)
 
 async function runJob() {
     const users = await gcal._getAllUsers()
