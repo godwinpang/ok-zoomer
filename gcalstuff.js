@@ -50,6 +50,7 @@ module.exports = {
 
             const result = await google.calendar('v3').events.list(args)
             const meetings = []
+            console.log("result: ", result)
             console.log(result.items)
             // for (meeting of result.items) {
             //     const meetingObj = {
