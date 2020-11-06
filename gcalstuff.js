@@ -38,9 +38,7 @@ module.exports = {
             const users = await db.collection('users').find({user_id}).toArray()
             const user = users[0]
 
-            console.log(user_id)
-            console.log(user)
-            oauth2Client.setCredentials(user.token)
+            oauth2Client.setCredentials(user.token.tokens)
 
             const args = {
                 auth: oauth2Client,
