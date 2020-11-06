@@ -120,16 +120,23 @@ async function getBotUserByTeam(teamId) {
 // HERE!!!!!!!!!!!!!!
 const gcal = require('./gcalstuff').init(controller)
 
+const min_to_end = 3
 async function runJob() {
     const users = await gcal._getAllUsers()
+    const now = new Date().getTime()
     for (user of users) {
         const {user_id, token} = user
         const events = await getEvents(user_id, token)
-        console.log(events)
+        for (eventObj of events) {
+            const end = new Date(eventObj.endTime)
+            if (eventEnd > new Date(now + ((min_to_end - 1) * 60000)) && eventEnd > new Date(now + ((min_to_end + 1) * 60000))) {
+                send_msg("Your meeting is about to end - please wrap things up soon :)", user_id)
+            }
+        }
     }
 }
 
-async function send_msg(controller, text, user_id) {
+async function send_msg(text, user_id) {
     const bot = await controller.spawn();
     await bot.api.chat.postMessage({text, channel: user_id, token: process.env.BOT_TOKEN})
 }
