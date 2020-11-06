@@ -35,8 +35,8 @@ module.exports = {
         }
 
         getEvents = async function(user_id, oauth_token) {
-            console.log(oauth_token)
-            oauth2Client.setCredentials({access_token: oauth_token})
+            oauth2Client.setCredentials(oauth_token.tokens)
+            console.log(tokens)
 
             const args = {
                 auth: oauth2Client,
