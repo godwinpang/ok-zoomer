@@ -30,7 +30,7 @@ module.exports = {
             const usersCursor = await db.collection('users').find()
             const users = []
             while(usersCursor.hasNext()) {
-                users.append(usersCursor.next())
+                users.push(usersCursor.next())
             }
 
             return users;
