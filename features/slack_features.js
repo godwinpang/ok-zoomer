@@ -137,6 +137,7 @@ module.exports = function(controller) {
     });
 
     controller.on('slash_command', async(bot, message) => {
+<<<<<<< Updated upstream
         if (message.text === 'plain') {
             await bot.reply(message, 'This is a plain reply');
         } else if (message.text === 'public') {
@@ -192,6 +193,18 @@ module.exports = function(controller) {
 
     controller.on('dialog_cancellation', async (bot, message) => {
         await bot.reply(message, 'Got a dialog cancellation');
+=======
+      console.log(bot, message)
+      bot.replyAcknowledge()
+      switch (message.command) {
+        case "/meeting-auth":
+          bot.reply(message, "gotcha!")
+          break;
+        default:
+          return
+      }
+      // bot.api.chat.postMessage({channel: message.user})
+>>>>>>> Stashed changes
     });
 
 }
