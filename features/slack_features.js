@@ -69,13 +69,15 @@ module.exports = function(controller) {
         case "/meeting-notify":
             const events = await gcal.getCurrentEvents(user_id)
             if (events.length == 0) {
+                console.log('skipping')
                 return
             }
             const eventToNotify = events[0]
+            console.log(`notifying events ${eventToNotify.title}`)
             const attendeesToNotify = gcal.getAttendees(user_name, eventToNotify)
             for (attendee of attendeesToNotify) {
                 const attendee_id = await gcal.getIDFromName(attendee)
-                send_msg(`${user_name} is running late for a meeting and will be late for ${eventToNotify.title} - please be understanding :D`, attendee_id)
+                await send_msg(`${user_name} is running late for a meeting and will be late for ${eventToNotify.title} - please be understanding :D`, attendee_id)
             }
         default:
           bot.replyAcknowledge(()=>{})
