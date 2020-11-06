@@ -50,6 +50,8 @@ module.exports = function(controller) {
     });
 
     controller.on('slash_command', async(bot, message) => {
+        const user_name = message.user_name
+        const user_id = message.user_id
       switch (message.command) {
         case "/meeting-auth":
           // get auth url and reply to them :)
@@ -58,8 +60,6 @@ module.exports = function(controller) {
           break;
         case "/meeting-token":
           const code = message.text
-          const user_id = message.user_id
-          const user_name = message.user_name
           // do something with auth here :)
           const token = await gcal.getToken(code)
           const user_object = {token, user_id, user_name}
@@ -67,13 +67,10 @@ module.exports = function(controller) {
           bot.replyPrivate(message, "Got your token")
           break;
         case "/meeting-notify":
-            const user_name = message.user_name
-            const user_id = message.user_id
             const events = await gcal.getCurrentEvents(user_id)
             if (length(events) == 0) {
                 return
             }
-
             const eventToNotify = events[0]
             const attendeesToNotify = gcal.getAttendees(user_name, eventToNotify)
             for (attendee of attendeesToNotify) {
