@@ -54,7 +54,7 @@ module.exports = function(controller) {
         case "/meeting-auth":
           // get auth url and reply to them :)
           const authURL = gcal.getAuthUrl()
-          bot.replyPrivate(message, `Click on this link ${authURL}, then copy the token and reply with /meeting-token <token>`)
+          bot.replyPrivate(message, `Click on this link ${authURL}\nThen copy the token and reply with /meeting-token <token>`)
           break;
         case "/meeting-token":
           const token = meeting.text
