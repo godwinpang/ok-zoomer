@@ -61,7 +61,8 @@ module.exports = {
             getAuthUrl,
             saveUser,
             _getAllUsers,
-            getEvents
+            getEvents,
+            getToken
         }
     }
 }
