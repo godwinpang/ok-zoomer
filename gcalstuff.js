@@ -49,7 +49,18 @@ module.exports = {
             }
 
             const result = await google.calendar('v3').events.list(args)
-            return result
+            const meetings = []
+            for (meeting of result.items) {
+                const meetingObj = {
+                    startTime: meeting.start.dateTime,
+                    endTime: meeting.end.dateTime,
+                    title: meeting.summary,
+                    attendees: meeting.attendees,
+                }
+                meetings.push(meetingObj)
+            }
+
+            return meetings
         }
 
         getToken = async function(code) {
