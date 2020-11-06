@@ -48,10 +48,9 @@ module.exports = function(controller) {
     });
 
     controller.on('slash_command', async(bot, message) => {
-      console.log(message)
       switch (message.command) {
         case "/meeting-auth":
-          bot.replyPrivate(message, "gotcha!")
+          bot.replyPrivate(message, "gotcha!", replyCallback)
           break;
         default:
           bot.replyAcknowledge(()=>{})
@@ -60,6 +59,10 @@ module.exports = function(controller) {
     });
 }
 
+function replyCallback(bot, message) {
+    console.log("WHHHHHHHHHHHHHHHHEEEEEEEEE")
+    console.log(bot, message)
+}
 
 // async function authenticate(controller, user_id){
 //   const bot = await controller.spawn()
