@@ -136,7 +136,7 @@ async function runJob() {
             const eventEnd = new Date(eventObj.endTime)
             if (eventEnd > new Date(now + ((min_to_end - 5) * 60000)) && eventEnd < new Date(now + ((min_to_end + 5) * 60000))) {
                 console.log(eventObj)
-                send_msg("Your meeting is about to end - please wrap things up soon :)", user_id)
+                send_msg(`Your meeting ${eventObj.title} is about to end - please wrap things up soon :)`, user_id)
             }
         }
     }
