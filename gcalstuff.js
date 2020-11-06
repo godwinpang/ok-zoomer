@@ -35,10 +35,9 @@ module.exports = {
         }
 
         getCurrentEvents = async function(user_id) {
-            const user = await db.collection('users').find({user_id}).toArray()[0]
+            const users = await db.collection('users').find({user_id}).toArray()
+            const user = users[0]
 
-            console.log(user_id)
-            console.log(user)
             oauth2Client.setCredentials(user.token)
 
             const args = {
