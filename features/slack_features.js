@@ -57,7 +57,7 @@ module.exports = function(controller) {
           bot.replyPrivate(message, `Click on this link ${authURL}\nThen copy the token and reply with /meeting-token <token>`)
           break;
         case "/meeting-token":
-          const token = meeting.text
+          const token = message.text
           const user_id = message.user_id
           const user_name = message.user_name
           // do something with auth here :)
