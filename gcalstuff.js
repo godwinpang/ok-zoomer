@@ -23,8 +23,7 @@ module.exports = {
         }
 
         saveUser = async function(userObj){
-            const res = await db.collection('users').insertOne(userObj)
-            console.log(res)
+            await db.collection('users').insertOne(userObj)
         }
 
         return {
