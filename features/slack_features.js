@@ -48,12 +48,13 @@ module.exports = function(controller) {
     });
 
     controller.on('slash_command', async(bot, message) => {
+      console.log(message.command)
       switch (message.command) {
         case "/meeting-auth":
-          bot.replyPrivate(message, "Starting auth process...", replyCallback)
-          bot.sendWebhook({
-            text: "test send to webhook"
-          }, replyCallback)
+          bot.replyPrivate(message, "Starting auth process...")
+          break;
+        case "/meeting-token":
+          bot.replyPrivate(message, "Got your token")
           break;
         default:
           bot.replyAcknowledge(()=>{})
