@@ -61,7 +61,7 @@ module.exports = function(controller) {
           const user_id = message.user_id
           const user_name = message.user_name
           // do something with auth here :)
-          const user_object = {user_id: {token, user_id, user_name}}
+          const user_object = {token, user_id, user_name}
           await gcal.saveUser(user_object)
           bot.replyPrivate(message, "Got your token")
           break;

@@ -13,15 +13,23 @@ const { BotkitCMSHelper } = require('botkit-plugin-cms');
 const { SlackAdapter, SlackMessageTypeMiddleware, SlackEventMiddleware } = require('botbuilder-adapter-slack');
 
 const { MongoDbStorage } = require('botbuilder-storage-mongodb');
+const { MongoClient } = require('mongodb');
 
 // Load process.env values from .env file
 require('dotenv').config();
+
+var db = null;
+var client = null;
 
 let storage = null;
 if (process.env.MONGO_URI) {
     storage = mongoStorage = new MongoDbStorage({
         url : process.env.MONGO_URI,
     });
+
+    client = new MongoClient(process.env.MONGO_URI)
+    await client.connect()
+    db = client.db('ok-zoomer')
 }
 
 const adapter = new SlackAdapter({
