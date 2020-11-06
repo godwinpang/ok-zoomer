@@ -17,7 +17,8 @@ module.exports = {
         }
 
         saveUser = async function(userObj){
-            await storage.write(userObj)
+            const wtf = await storage.write(userObj)
+            console.log(wtf)
         }
 
         return {
