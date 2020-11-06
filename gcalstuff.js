@@ -7,6 +7,7 @@ const oauth2Client = new google.auth.OAuth2(
 
 module.exports = {
     init: function(controller) {
+        const storage = controller.storage
         getAuthUrl = function(){
             return oauth2Client.generateAuthUrl({
                 access_type: 'offline', // 'online' (default) or 'offline' (gets refresh_token),
@@ -15,8 +16,17 @@ module.exports = {
             });
         }
 
+        saveUser = function(userObj){
+            storage.users.save(userObj, function(err, data){
+                if (err) {
+                    console.error(err)
+                }
+            })
+        }
+
         return {
-            getAuthUrl
+            getAuthUrl,
+            saveUser
         }
     }
 }
