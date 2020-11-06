@@ -48,7 +48,7 @@ module.exports = {
                 orderBy: 'startTime',
                 timeZone: "utc",
                 timeMin: new Date(),
-                timeMax: new Date()
+                timeMax: addMinutes(new Date(), 1)
             }
 
             const result = await google.calendar('v3').events.list(args)
