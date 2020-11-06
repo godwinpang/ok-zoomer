@@ -68,7 +68,7 @@ module.exports = function(controller) {
           break;
         case "/meeting-notify":
             const events = await gcal.getCurrentEvents(user_id)
-            if (length(events) == 0) {
+            if (events.length == 0) {
                 return
             }
             const eventToNotify = events[0]
