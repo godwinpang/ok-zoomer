@@ -66,11 +66,31 @@ module.exports = function(controller) {
           await gcal.saveUser(user_object)
           bot.replyPrivate(message, "Got your token")
           break;
+        case "/meeting-notify":
+            const user_name = message.user_name
+            const user_id = message.user_id
+            const events = await gcal.getCurrentEvents(user_id)
+            if (length(events) == 0) {
+                return
+            }
+
+            const eventToNotify = events[0]
+            const attendeesToNotify = gcal.getAttendees(user_name, eventToNotify)
+            for (attendee of attendeesToNotify) {
+                const attendee_id = await gcal.getIDFromName(attendee)
+                send_msg(`${user_name} is running late for a meeting and will be late for ${eventToNotify.title} - please be understanding :D`, attendee_id)
+            }
         default:
           bot.replyAcknowledge(()=>{})
           return
       }
     });
+}
+
+
+async function send_msg(text, user_id) {
+    const bot = await controller.spawn();
+    await bot.api.chat.postMessage({text, channel: user_id, token: process.env.BOT_TOKEN})
 }
 
 // async function authenticate(controller, user_id){
