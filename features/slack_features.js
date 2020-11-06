@@ -48,7 +48,7 @@ module.exports = function(controller) {
     });
 
     controller.on('slash_command', async(bot, message) => {
-      console.log(message.command)
+      console.log(message)
       switch (message.command) {
         case "/meeting-auth":
           bot.replyPrivate(message, "Starting auth process...")
