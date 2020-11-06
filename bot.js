@@ -129,6 +129,7 @@ async function runJob() {
         console.log(`processing ${user_name}`)
         const events = await getEvents(user_id, token)
         for (eventObj of events) {
+            console.log(`processing ${eventObj.title}`)
             if (!eventObj.endTime) {
                 continue
             }
