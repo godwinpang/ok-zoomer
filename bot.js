@@ -61,7 +61,12 @@ const controller = new Botkit({
 });
 
 controller.webserver.get('/auth/callback', function(req, res) {
-    res.send(`<p>Next, copy and paste this Authentication Code in Slack with the command /meeting-token ${req.query.code}`);
+    res.send(`<div style="text-align: center; margin-top: 25px; font-family: sans-serif;">
+      <h1>Send this to <i>@Ok Zoomer</i> on Slack:</h1>
+      <textarea style="width: 70%; margin: auto; height: 150px; padding: 15px; text-align: center; font-size: 1.3em; color: steelblue;">
+        /meeting-token ${req.query.code}
+      </textarea>
+    </div>`);
   });
 
 if (process.env.CMS_URI) {
@@ -147,6 +152,5 @@ async function send_msg(text, user_id) {
     await bot.api.chat.postMessage({text, channel: user_id, token: process.env.BOT_TOKEN})
 }
 
-// setInterval(()=>send_msg(controller, "life is great :)", "U01A61TQ5KL"), 1000)
 runJob()
 setInterval(runJob, 60000*5)
