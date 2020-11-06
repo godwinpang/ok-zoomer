@@ -134,7 +134,7 @@ async function runJob() {
                 continue
             }
             const eventEnd = new Date(eventObj.endTime)
-            if (eventEnd > new Date(now + ((min_to_end - 5) * 60000)) && eventEnd < new Date(now + ((min_to_end + 5) * 60000))) {
+            if (eventEnd > new Date(now - ((5) * 60000)) && eventEnd < new Date(now + ((7) * 60000))) {
                 console.log(eventObj)
                 send_msg(`Your meeting ${eventObj.title} is about to end - please wrap things up soon :)`, user_id)
             }
@@ -148,4 +148,4 @@ async function send_msg(text, user_id) {
 }
 
 // setInterval(()=>send_msg(controller, "life is great :)", "U01A61TQ5KL"), 1000)
-setInterval(runJob, 10000)
+setInterval(runJob, 60000*5)
