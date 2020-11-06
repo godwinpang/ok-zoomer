@@ -5,7 +5,9 @@
 const { SlackDialog } = require('botbuilder-adapter-slack');
 const { BotkitConversation } = require('botkit');
 
+
 module.exports = function(controller) {
+    const gcal = require('../gcalstuff').init(controller)
 
     controller.ready(async () => {
         if (process.env.MYTEAM) {
@@ -48,12 +50,17 @@ module.exports = function(controller) {
     });
 
     controller.on('slash_command', async(bot, message) => {
-      console.log(message)
       switch (message.command) {
         case "/meeting-auth":
-          bot.replyPrivate(message, "Starting auth process...")
+          // get auth url and reply to them :)
+          const authURL = gcal.getAuthUrl()
+          bot.replyPrivate(message, `Click on this link ${authURL}, then copy the token and reply with /meeting-token <token>`)
           break;
         case "/meeting-token":
+          const token = meeting.text
+          const user_id = message.user_id
+          const user_name = message.user_name
+          // do something with auth here :)
           bot.replyPrivate(message, "Got your token")
           break;
         default:
@@ -61,11 +68,6 @@ module.exports = function(controller) {
           return
       }
     });
-}
-
-function replyCallback(bot, message) {
-    console.log("WHHHHHHHHHHHHHHHHEEEEEEEEE")
-    console.log(bot, message)
 }
 
 // async function authenticate(controller, user_id){
